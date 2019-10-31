@@ -24,11 +24,11 @@ export class RuisApiService {
     return this.http.post(`${environment.api_url}/pessoa_fisica/pessoa/`, data)
   }
 
-  salvaTelefones(idPessoa: number, telefones: Telefone[]) {
-    return null;
+  salvaTelefones(telefone: Telefone) {
+    return this.http.post(`${environment.api_url}/pessoa_fisica/telefone/`, telefone)
   }
 
-  salvaEnderecos(idPessoa: number, enderecos : Endereco[]) {
-    return null;
+  salvaEnderecos(endereco: Endereco) {
+    return this.http.post(`${environment.api_url}/pessoa_fisica/endereco/`, endereco)
   }
 }

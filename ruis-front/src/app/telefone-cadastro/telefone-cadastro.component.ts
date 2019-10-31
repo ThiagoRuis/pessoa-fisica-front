@@ -33,11 +33,11 @@ export class TelefoneCadastroComponent implements OnInit {
   
     console.warn(dadosForm);
     
-    // this.api.salvaEnderecos([dadosForm]).subscribe(()=>{
-    //   this.router.navigate(['/']);
-    // }, (error) => {
-    //   this.msgErro = 'Ocorreu um erro no cadastro!';
-    //   console.log(dadosForm);
-    // });
+    this.api.salvaTelefones(dadosForm).subscribe(()=>{
+      this.router.navigate(['/']);
+    }, (error) => {
+      this.msgErro = 'Ocorreu um erro no cadastro!';
+      console.log(dadosForm);
+    });
   }
 }
