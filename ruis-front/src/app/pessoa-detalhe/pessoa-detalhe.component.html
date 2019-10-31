@@ -8,7 +8,7 @@
     <mat-list-item> Data Cadastro: {{pessoa.data_cadastro}} </mat-list-item>   
 </mat-list>
 <mat-divider></mat-divider>
-<table mat-table [dataSource]="pessoa.telefones" class="tabela-padrao">
+<table mat-table [dataSource]="pessoa.telefones" class="mat-elevation-z8 tabela-padrao">
     <ng-container matColumnDef="numero">
         <th mat-header-cell *matHeaderCellDef> Numero </th>
         <td mat-cell *matCellDef="let telefone"> {{telefone.numero}} </td>
@@ -18,7 +18,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumnsTelefone;"></tr>
 </table>
 <mat-divider></mat-divider>
-<table mat-table [dataSource]="pessoa.enderecos" class="tabela-padrao">
+<table mat-table [dataSource]="pessoa.enderecos" class="mat-elevation-z8 tabela-padrao">
     <ng-container matColumnDef="logradouro">
         <th mat-header-cell *matHeaderCellDef> Logradouro </th>
         <td mat-cell *matCellDef="let endereco"> {{endereco.logradouro}} </td>
