@@ -10,12 +10,23 @@ import { Router } from '@angular/router';
 })
 export class TelefoneCadastroComponent implements OnInit {
   msgErro: string;
+  pessoasList: [];
   telefoneForm = new FormGroup({
     numero: new FormControl(''),
+    pessoa: new FormControl(''),
   });
   constructor(private api : RuisApiService, private router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.listaPessoas();
+  }
+
+  listaPessoas() {
+    this.api.getListaPessoas().subscribe((data: any)=> {
+      console.log(data);
+      this.pessoasList = data;
+    });
+  }
 
   salvaFormulario() {
     let dadosForm = this.telefoneForm.value;

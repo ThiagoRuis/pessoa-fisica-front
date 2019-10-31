@@ -10,17 +10,28 @@ import { Router } from '@angular/router';
 })
 export class EnderecoCadastroComponent implements OnInit {
   msgErro: string;
+  pessoasList: [];
   enderecoForm = new FormGroup({
     logradouro: new FormControl(''),
     cep: new FormControl(''),
     bairro: new FormControl(''),
     cidade: new FormControl(''),
     uf: new FormControl(''),
+    pessoa: new FormControl(''),
   });
 
   constructor(private api : RuisApiService, private router: Router) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.listaPessoas();
+  }
+
+  listaPessoas() {
+    this.api.getListaPessoas().subscribe((data: any)=> {
+      console.log(data);
+      this.pessoasList = data;
+    });
+  }
 
   salvaFormulario() {
     let dadosForm = this.enderecoForm.value;

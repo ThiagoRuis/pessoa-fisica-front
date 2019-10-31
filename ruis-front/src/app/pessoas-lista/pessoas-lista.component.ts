@@ -20,9 +20,7 @@ export class PessoasListaComponent implements OnInit {
 
   listaPessoas() {
     this.api.getListaPessoas().subscribe((data: any)=> {
-      console.log('>>>>>>>>>>>>>>>');
       console.log(data);
-      console.log('>>>>>>>>>>>>>>>');
       this.pessoasList = data;
     });
   }

@@ -18,7 +18,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatSelectModule} from '@angular/material/select';
 
 import { PessoasListaComponent } from './pessoas-lista/pessoas-lista.component';
 import { PessoaDetalheComponent } from './pessoa-detalhe/pessoa-detalhe.component';
@@ -53,6 +53,7 @@ import { TelefoneCadastroComponent } from './telefone-cadastro/telefone-cadastro
     MatToolbarModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
