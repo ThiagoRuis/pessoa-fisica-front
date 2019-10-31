@@ -2,23 +2,23 @@
   <div class="formulario-cadastro">
     <mat-form-field appearance="outline">
       <mat-label>Nome</mat-label>
-      <input matInput placeholder="Insira seu nome completo ..." formControlName="nome">
+      <input matInput placeholder="Insira seu nome completo ..." formControlName="nome" [value]="pessoa.nome">
       <mat-hint>Nome Completo</mat-hint>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>CPF</mat-label>
-      <input matInput placeholder="Insira seu CPF ..." formControlName="cpf">
+      <input matInput placeholder="Insira seu CPF ..." formControlName="cpf" [value]="pessoa.cpf">
       <mat-hint>Somente numeros</mat-hint>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
-      <input matInput placeholder="Insira seu Email ..." formControlName="email">
+      <input matInput placeholder="Insira seu Email ..." formControlName="email" [value]="pessoa.email">
       <mat-hint>email@dominio.com</mat-hint>
     </mat-form-field>
     
     <mat-form-field appearance="outline">
       <mat-label>Data de nascimento</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="data_nascimento">
+      <input matInput [matDatepicker]="picker" formControlName="data_nascimento" [value]="pessoa.data_nascimento">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>

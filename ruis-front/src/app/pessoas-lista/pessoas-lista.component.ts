@@ -8,7 +8,7 @@ import { RuisApiService } from '../ruis-api.service';
   styleUrls: ['./pessoas-lista.component.css']
 })
 export class PessoasListaComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'data_nascimento', 'data_cadastro'];
+  displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'data_nascimento', 'data_cadastro', 'acoes'];
   pessoasList = [];
 
   panelOpenState = false;
@@ -25,8 +25,20 @@ export class PessoasListaComponent implements OnInit {
     });
   }
 
-  abreDetalhe(row: any) {
-    this.router.navigate(['/detalhe/'+row.id]);
+  abreDetalhe(id) {
+    this.router.navigate(['/detalhe/'+ id]);
   } 
+
+  abreEdicao(id) {
+    this.router.navigate(['/cadastro-pessoa/'+ id]);
+  }
+
+  deleta(id) {
+    this.api.deletePessoa(id).subscribe((data: any)=> {
+      this.api.getListaPessoas().subscribe((data: any)=> {
+        this.pessoasList = data;
+      });
+    });
+  }
 
 }

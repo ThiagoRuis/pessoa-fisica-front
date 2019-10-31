@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { RuisApiService } from '../ruis-api.service';
 import { Router } from '@angular/router';
 
@@ -10,6 +11,9 @@ import { Router } from '@angular/router';
 })
 export class PessoaCadastroComponent implements OnInit {
   msgErro: string;
+  id: string;
+  pessoa: any;
+  edicao = false;
   pessoaFisicaForm = new FormGroup({
     nome: new FormControl(''),
     cpf: new FormControl(''),
@@ -17,9 +21,20 @@ export class PessoaCadastroComponent implements OnInit {
     data_nascimento: new FormControl(''),
   });
 
-  constructor(private api : RuisApiService, private router: Router) { }
+  constructor(private api : RuisApiService, private router: Router, private activatedRoute : ActivatedRoute) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.consultaPessoa(this.id);
+  }
+
+  consultaPessoa(id: string) {
+    this.api.getPessoa(id).subscribe((data: any) => {
+        console.log(data);
+        this.pessoa = data;
+        this.edicao = true;
+    });
+  }
   
   salvaFormulario() {
     let dadosForm = this.pessoaFisicaForm.value;
@@ -30,13 +45,24 @@ export class PessoaCadastroComponent implements OnInit {
     }
   
     dadosForm.data_nascimento = this.converteObjetoData(dadosForm.data_nascimento); 
-    console.warn(dadosForm.cpf);
-    this.api.salvaPessoa(dadosForm).subscribe(()=>{
-      this.router.navigate(['/']);
-    }, (error) => {
-      this.msgErro = 'Ocorreu um erro no cadastro!';
-      console.log(dadosForm);
-    });
+    
+    if(this.edicao) {
+      console.warn(dadosForm);
+      dadosForm['id'] = this.pessoa.id;
+      this.api.atualizaPessoa(dadosForm).subscribe(()=>{
+        this.router.navigate(['/']);
+      }, (error) => {
+        this.msgErro = 'Ocorreu um erro no cadastro!';
+        console.log(dadosForm);
+      });
+    } else {
+      this.api.salvaPessoa(dadosForm).subscribe(()=>{
+        this.router.navigate(['/']);
+      }, (error) => {
+        this.msgErro = 'Ocorreu um erro no cadastro!';
+        console.log(dadosForm);
+      });
+    }
   }
 
   converteObjetoData(data: any) {
