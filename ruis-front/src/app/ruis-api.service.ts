@@ -6,11 +6,14 @@ import { environment } from '../environments/environment';
   providedIn: 'root'
 })
 export class RuisApiService {
-  private pessoasFisicas = [];
   constructor(private http: HttpClient) { }
 
 
   getListaPessoas() {
-    return this.http.get(`${environment.api_url}/pessoa_fisica/pessoa/`)
+    return this.http.get(`${environment.api_url}/pessoa_fisica/pessoa/`);
+  }
+
+  getPessoa(id: string) {
+    return this.http.get(`${environment.api_url}/pessoa_fisica/pessoa/${id}`);
   }
 }

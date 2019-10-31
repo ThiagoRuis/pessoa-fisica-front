@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RuisApiService } from '../ruis-api.service';
 
 @Component({
   selector: 'app-pessoas-lista',
@@ -8,67 +9,23 @@ import { Router } from '@angular/router';
 })
 export class PessoasListaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nome', 'cpf', 'email', 'data_nascimento', 'data_cadastro'];
-  pessoasList =[
-    {
-        "id": 1,
-        "nome": "Pessoa teste",
-        "cpf": "11111111111",
-        "email": "email@email.com",
-        "data_nascimento": "2019-10-28",
-        "data_cadastro": "2019-10-29",
-        "enderecos": [
-            {
-                "id": 1,
-                "pessoa": 1,
-                "logradouro": "Rua dos bobos, 0",
-                "cep": "00000-000",
-                "bairro": "Reduto bobo",
-                "cidade": "Bobolandia",
-                "uf": "NA"
-            }
-        ],
-        "telefones": [
-            {
-                "id": 12,
-                "numero": "11 2222 4444",
-                "pessoa": 1
-            }
-        ]
-    },
-    {
-      "id": 42,
-      "nome": "Pessoa teste",
-      "cpf": "11111111111",
-      "email": "email@email.com",
-      "data_nascimento": "2019-10-28",
-      "data_cadastro": "2019-10-29",
-      "enderecos": [
-          {
-              "id": 1,
-              "pessoa": 1,
-              "logradouro": "Rua dos bobos, 0",
-              "cep": "00000-000",
-              "bairro": "Reduto bobo",
-              "cidade": "Bobolandia",
-              "uf": "NA"
-          }
-      ],
-      "telefones": [
-          {
-              "id": 12,
-              "numero": "11 2222 4444",
-              "pessoa": 1
-          }
-      ]
-  }
-];
+  pessoasList = [];
 
   panelOpenState = false;
-  constructor(private router: Router) { }
+  constructor(private router: Router, private api: RuisApiService) { }
 
   ngOnInit() {
+    this.listaPessoas();
   }
 
+  listaPessoas() {
+    this.api.getListaPessoas().subscribe((data: any)=> {
+      console.log('>>>>>>>>>>>>>>>');
+      console.log(data);
+      console.log('>>>>>>>>>>>>>>>');
+      this.pessoasList = data;
+    });
+  }
 
   abreDetalhe(row: any) {
     this.router.navigate(['/detalhe/'+row.id]);

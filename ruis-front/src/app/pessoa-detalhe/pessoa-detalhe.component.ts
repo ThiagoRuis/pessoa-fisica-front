@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { RuisApiService } from '../ruis-api.service';
+import { PessoaFisica } from '../pessoa-fisica'
 
 @Component({
   selector: 'app-pessoa-detalhe',
@@ -6,38 +9,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pessoa-detalhe.component.css']
 })
 export class PessoaDetalheComponent implements OnInit {
-  pessoa = {
-      "id": 1,
-      "nome": "Pessoa teste",
-      "cpf": "11111111111",
-      "email": "email@email.com",
-      "data_nascimento": "2019-10-28",
-      "data_cadastro": "2019-10-29",
-      "enderecos": [
-          {
-              "id": 1,
-              "pessoa": 1,
-              "logradouro": "Rua dos bobos, 0",
-              "cep": "00000-000",
-              "bairro": "Reduto bobo",
-              "cidade": "Bobolandia",
-              "uf": "NA"
-          }
-      ],
-      "telefones": [
-          {
-              "id": 12,
-              "numero": "11 2222 4444",
-              "pessoa": 1
-          }
-      ]
-  };
+  private id: string;
+  private pessoa = PessoaFisica;
   displayedColumnsTelefone: string[] = ['numero'];
   displayedColumnsEndereco: string[] = ['logradouro', 'cep', 'bairro', 'cidade', 'uf'];
   
-  constructor() { }
+  constructor(private api: RuisApiService, private activatedRoute : ActivatedRoute) { }
 
   ngOnInit() {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.consultaPessoa(this.id);
+  }
+
+  consultaPessoa(id: string) {
+    this.api.getPessoa(id).subscribe((data: any) => {
+        console.log('>>>>>>>>>>>>');
+        console.log(data);
+        console.log('>>>>>>>>>>>>');
+        this.pessoa = data;
+    });
   }
 
 }
