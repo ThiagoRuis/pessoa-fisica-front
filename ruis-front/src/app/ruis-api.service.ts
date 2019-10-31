@@ -64,7 +64,7 @@ export class RuisApiService {
   }
   
   atualizaEnderecos(endereco: Endereco) {
-    return this.http.put(`${environment.api_url}/pessoa_fisica/endereco//${endereco.id}/`, endereco)
+    return this.http.put(`${environment.api_url}/pessoa_fisica/endereco/${endereco.id}/`, endereco)
   }
 
   deleteEndereco(id: string) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { RuisApiService } from '../ruis-api.service';
 import { Router } from '@angular/router';
 
@@ -11,6 +12,9 @@ import { Router } from '@angular/router';
 export class EnderecoCadastroComponent implements OnInit {
   msgErro: string;
   pessoasList: [];
+  id: string;
+  endereco: any;
+  edicao = false;
   enderecoForm = new FormGroup({
     logradouro: new FormControl(''),
     cep: new FormControl(''),
@@ -20,10 +24,19 @@ export class EnderecoCadastroComponent implements OnInit {
     pessoa: new FormControl(''),
   });
 
-  constructor(private api : RuisApiService, private router: Router) { }
+  constructor(private api : RuisApiService, private router: Router, private activatedRoute : ActivatedRoute) { }
 
   ngOnInit() {
     this.listaPessoas();
+    this.id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.consultaEndereco(this.id);
+  }
+  
+  consultaEndereco(id: string) {
+    this.api.getEndereco(id).subscribe((data: any) => {
+        this.endereco = data;
+        this.edicao = true;
+    });
   }
 
   listaPessoas() {
@@ -36,13 +49,21 @@ export class EnderecoCadastroComponent implements OnInit {
   salvaFormulario() {
     let dadosForm = this.enderecoForm.value;
   
-    console.warn(dadosForm);
-    
-    this.api.salvaEnderecos(dadosForm).subscribe(()=>{
-      this.router.navigate(['/']);
-    }, (error) => {
-      this.msgErro = 'Ocorreu um erro no cadastro!';
-      console.log(dadosForm);
-    });
+    if(this.edicao) {
+      dadosForm['id'] = this.endereco.id;
+      this.api.atualizaEnderecos(dadosForm).subscribe(()=>{
+        this.router.navigate(['/']);
+      }, (error) => {
+        this.msgErro = 'Ocorreu um erro no cadastro!';
+        console.log(dadosForm);
+      });
+    } else {
+      this.api.salvaEnderecos(dadosForm).subscribe(()=>{
+        this.router.navigate(['/']);
+      }, (error) => {
+        this.msgErro = 'Ocorreu um erro no cadastro!';
+        console.log(dadosForm);
+      });
+    }
   }
 }

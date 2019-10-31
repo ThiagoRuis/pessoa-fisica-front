@@ -30,7 +30,6 @@ export class PessoaCadastroComponent implements OnInit {
 
   consultaPessoa(id: string) {
     this.api.getPessoa(id).subscribe((data: any) => {
-        console.log(data);
         this.pessoa = data;
         this.edicao = true;
     });
@@ -47,20 +46,17 @@ export class PessoaCadastroComponent implements OnInit {
     dadosForm.data_nascimento = this.converteObjetoData(dadosForm.data_nascimento); 
     
     if(this.edicao) {
-      console.warn(dadosForm);
       dadosForm['id'] = this.pessoa.id;
       this.api.atualizaPessoa(dadosForm).subscribe(()=>{
         this.router.navigate(['/']);
       }, (error) => {
         this.msgErro = 'Ocorreu um erro no cadastro!';
-        console.log(dadosForm);
       });
     } else {
       this.api.salvaPessoa(dadosForm).subscribe(()=>{
         this.router.navigate(['/']);
       }, (error) => {
         this.msgErro = 'Ocorreu um erro no cadastro!';
-        console.log(dadosForm);
       });
     }
   }

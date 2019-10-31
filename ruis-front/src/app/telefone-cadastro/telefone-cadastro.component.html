@@ -2,7 +2,7 @@
     <div class="formulario-cadastro">
         <mat-form-field>
             <mat-label>Selecione a pessoa</mat-label>
-            <mat-select formControlName="pessoa" required>
+            <mat-select formControlName="pessoa" required ([value])="numero.pessoa">
                 <mat-option>--</mat-option>
                 <mat-option *ngFor="let pessoa of pessoasList" [value]="pessoa.id">
                 {{pessoa.id}} - {{pessoa.nome}}
@@ -12,7 +12,7 @@
                   
         <mat-form-field appearance="outline">
             <mat-label>Numero</mat-label>
-            <input matInput formControlName="numero" required>
+            <input matInput formControlName="numero" required [value]="numero.numero">
         </mat-form-field>
     </div>
     <button mat-raised-button type="submit">Salvar</button>
