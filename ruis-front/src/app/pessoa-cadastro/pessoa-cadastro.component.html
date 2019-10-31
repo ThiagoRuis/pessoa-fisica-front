@@ -23,6 +23,14 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
   </div> 
+
+  <div [formGroup]="telefones" class="formulario-cadastro">
+    <mat-form-field appearance="outline">
+      <mat-label>Numero</mat-label>
+      <input matInput formControlName="numero">
+    </mat-form-field>
+  </div> 
+
   <button mat-raised-button type="submit">Salvar</button>
 </form>
 
@@ -50,9 +58,4 @@
   </mat-form-field>
 </div>
   
-<div class="formulario-cadastro">
-  <mat-form-field appearance="outline">
-    <mat-label>Numero</mat-label>
-    <input matInput name="numero">
-  </mat-form-field>
-</div>   -->
+  -->

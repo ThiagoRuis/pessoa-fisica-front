@@ -23,6 +23,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { PessoasListaComponent } from './pessoas-lista/pessoas-lista.component';
 import { PessoaDetalheComponent } from './pessoa-detalhe/pessoa-detalhe.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
+import { EnderecoCadastroComponent } from './endereco-cadastro/endereco-cadastro.component';
+import { TelefoneCadastroComponent } from './telefone-cadastro/telefone-cadastro.component';
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
     PessoasListaComponent,
     PessoaDetalheComponent,
     PessoaCadastroComponent,
+    EnderecoCadastroComponent,
+    TelefoneCadastroComponent,
   ],
   imports: [
     BrowserModule,

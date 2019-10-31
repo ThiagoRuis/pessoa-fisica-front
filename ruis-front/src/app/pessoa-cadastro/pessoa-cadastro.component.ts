@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { RuisApiService } from '../ruis-api.service';
 import { Router } from '@angular/router';
 
@@ -10,28 +10,35 @@ import { Router } from '@angular/router';
 })
 export class PessoaCadastroComponent implements OnInit {
   msgErro: string;
-  pessoaFisicaForm = new FormGroup({
-    nome: new FormControl(''),
-    cpf: new FormControl(''),
-    email: new FormControl(''),
-    data_nascimento: new FormControl(''),
-  });
+  pessoaFisicaForm: FormGroup;
 
-  constructor(private api : RuisApiService, private router: Router) { }
+  constructor(private api : RuisApiService, private router: Router, private formBuilder: FormBuilder) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.pessoaFisicaForm = this.formBuilder.group({
+      nome: ['', Validators.required],
+      cpf: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      data_nascimento: ['', Validators.required],
+      telefones: new FormArray([]),
+      enderecos: new FormArray([]),
+    });
+  }
   
   salvaFormulario() {
+    
+    console.warn(this.pessoaFisicaForm.value);
+    return;
     let dadosForm = this.pessoaFisicaForm.value;
     
     if(! this.validaCPF(dadosForm.cpf) || dadosForm.cpf.indexOf('-') > -1 || dadosForm.cpf.indexOf('.') > -1){
       this.msgErro = 'CPF Inválido!';
       return;
     }
-  
+    
     dadosForm.data_nascimento = this.converteObjetoData(dadosForm.data_nascimento); 
     console.warn(dadosForm.cpf);
-    this.api.salvaPessoa(dadosForm).subscribe(()=>{
+    this.api.salvaPessoa(dadosForm).subscribe((dadosRetorno: any)=>{
       this.router.navigate(['/']);
     }, (error) => {
       this.msgErro = 'Ocorreu um erro no cadastro!';
