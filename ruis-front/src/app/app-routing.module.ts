@@ -7,6 +7,7 @@ import { PessoaCadastroComponent} from './pessoa-cadastro/pessoa-cadastro.compon
 const routes: Routes = [
   { path: '', component: PessoasListaComponent },
   { path: 'detalhe/:id', component: PessoaDetalheComponent },
+  { path: 'cadastro', component: PessoaCadastroComponent },
   { path: 'cadastro/:id', component: PessoaCadastroComponent },
 ];
 

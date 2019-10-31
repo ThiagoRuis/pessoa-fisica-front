@@ -32,6 +32,8 @@ export class PessoaDetalheComponent implements OnInit {
           }
       ]
   };
+  displayedColumnsTelefone: string[] = ['numero'];
+  displayedColumnsEndereco: string[] = ['logradouro', 'cep', 'bairro', 'cidade', 'uf'];
   
   constructor() { }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pessoas-lista',
@@ -35,7 +36,7 @@ export class PessoasListaComponent implements OnInit {
         ]
     },
     {
-      "id": 2,
+      "id": 42,
       "nome": "Pessoa teste",
       "cpf": "11111111111",
       "email": "email@email.com",
@@ -63,9 +64,14 @@ export class PessoasListaComponent implements OnInit {
 ];
 
   panelOpenState = false;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
+
+
+  abreDetalhe(row: any) {
+    this.router.navigate(['/detalhe/'+row.id]);
+  } 
 
 }

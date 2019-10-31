@@ -1,1 +1,49 @@
-<p>pessoa-detalhe works!</p>
+<h3>{{pessoa.nome}}</h3>
+ 
+<mat-list>
+    <mat-list-item> Id: {{pessoa.id}} </mat-list-item>
+    <mat-list-item> CPF: {{pessoa.cpf}} </mat-list-item>
+    <mat-list-item> Email: {{pessoa.email}} </mat-list-item>
+    <mat-list-item> Data Nascimento: {{pessoa.data_nascimento}} </mat-list-item>
+    <mat-list-item> Data Cadastro: {{pessoa.data_cadastro}} </mat-list-item>   
+</mat-list>
+<mat-divider></mat-divider>
+<table mat-table [dataSource]="pessoa.telefones" class="tabela-padrao">
+    <ng-container matColumnDef="numero">
+        <th mat-header-cell *matHeaderCellDef> Numero </th>
+        <td mat-cell *matCellDef="let telefone"> {{telefone.numero}} </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsTelefone"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsTelefone;"></tr>
+</table>
+<mat-divider></mat-divider>
+<table mat-table [dataSource]="pessoa.enderecos" class="tabela-padrao">
+    <ng-container matColumnDef="logradouro">
+        <th mat-header-cell *matHeaderCellDef> Logradouro </th>
+        <td mat-cell *matCellDef="let endereco"> {{endereco.logradouro}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="cep">
+        <th mat-header-cell *matHeaderCellDef> CEP </th>
+        <td mat-cell *matCellDef="let endereco"> {{endereco.cep}} </td>
+    </ng-container>
+    
+    <ng-container matColumnDef="bairro">
+        <th mat-header-cell *matHeaderCellDef> Bairro </th>
+        <td mat-cell *matCellDef="let endereco"> {{endereco.bairro}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="cidade">
+        <th mat-header-cell *matHeaderCellDef> Cidade </th>
+        <td mat-cell *matCellDef="let endereco"> {{endereco.cidade}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="uf">
+        <th mat-header-cell *matHeaderCellDef> UF </th>
+        <td mat-cell *matCellDef="let endereco"> {{endereco.uf}} </td>
+    </ng-container>
+    
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsEndereco"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsEndereco;"></tr>
+</table>
