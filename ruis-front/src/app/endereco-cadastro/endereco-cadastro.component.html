@@ -1,1 +1,25 @@
-<p>endereco-cadastro works!</p>
+<form [formGroup]="enderecoForm" (ngSubmit)="salvaFormulario()">
+    <div class="formulario-cadastro">
+        <mat-form-field appearance="outline">
+            <mat-label>Logradouro</mat-label>
+            <input matInput formControlName="logradouro">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>CEP</mat-label>
+            <input matInput formControlName="cep">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Bairro</mat-label>
+            <input matInput formControlName="bairro">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Cidade</mat-label>
+            <input matInput formControlName="cidade">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>UF</mat-label>
+            <input matInput formControlName="uf">
+        </mat-form-field>
+    </div>
+    <button mat-raised-button type="submit">Salvar</button>
+</form>

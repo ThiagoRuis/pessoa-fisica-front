@@ -1,1 +1,9 @@
-<p>telefone-cadastro works!</p>
+<form [formGroup]="telefoneForm" (ngSubmit)="salvaFormulario()">
+    <div class="formulario-cadastro">
+        <mat-form-field appearance="outline">
+            <mat-label>Numero</mat-label>
+            <input matInput formControlName="numero">
+        </mat-form-field>
+    </div>
+    <button mat-raised-button type="submit">Salvar</button>
+</form>    

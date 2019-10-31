@@ -1,0 +1,4 @@
+.formulario-cadastro {
+    display: flex;
+    flex-direction: column;
+}
